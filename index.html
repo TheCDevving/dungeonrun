@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dungeon Run</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: "Roboto Mono", monospace;
+      background-color: #E8F0FE;
+    }
+    
+    #chestContainer {
+      display: inline-block;
+      cursor: pointer;
+    }
+    
+    img {
+      display: block;
+      margin: 0 auto;
+      transition: transform 0.2s;
+    }
+    
+    img:hover {
+      transform: scale(1.05);
+    }
+    
+    .completed {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click to claim your dungeon rewards!</h1>
+  
+  <div id="chestContainer" onclick="toggleChest()">
+    <img id="closedChest" src="closed_chest.png" width="150" />
+    <img id="recombobulator" src="recombobulator.png" class="completed" width="120" />
+    <img id="openedChest" src="opened_chest.png" class="completed" width="150" />
+    <p id="completionText" class="completed"></p>
+  </div>
+  
+  <script>
+    function toggleChest() {
+      var closedChest = document.getElementById("closedChest");
+      var recombobulator = document.getElementById("recombobulator");
+      var openedChest = document.getElementById("openedChest");
+      var completionText = document.getElementById("completionText");
+      
+      if (closedChest.classList.contains("completed")) {
+        // Revert to initial state
+        closedChest.classList.remove("completed");
+        recombobulator.classList.add("completed");
+        openedChest.classList.add("completed");
+        completionText.classList.add("completed");
+        completionText.innerHTML = "";
+      } else {
+        // Chest is clicked for the first time
+        closedChest.classList.add("completed");
+        recombobulator.classList.remove("completed");
+        openedChest.classList.remove("completed");
+        completionText.classList.remove("completed");
+        completionText.innerHTML = "<strong>You finished your first dungeon run!</strong><br>Now try using your new coins to explore other methods of making coins such as farming";
+      }
+    }
+  </script>
+</body>
+</html>
